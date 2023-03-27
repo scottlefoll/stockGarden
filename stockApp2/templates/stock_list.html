@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+
+{% block content %}
+<div id="content-wrap2">
+    <div id="stock-list-div">
+        <h2>Stock Portfolio</h2>
+        <a href="{% url 'add_stock' %}"><button>Add Stock</button></a>
+        <!-- <a href="{% url 'update_stock_list' %}"><button>Update Portfolio</button></a> -->
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <form method="post">
+    {% csrf_token %}
+        <div id="stock-list-table-div">
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Close</th>
+                        <th>Volume</th>
+                        <th>Exchange</th>
+                        <th>Delete</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stocks %}
+                    <tr>
+                        <td><a href="{% url 'stock_detail' stock.symbol %}">{{ stock.symbol }}</a></td>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.date|date:"m/d/y" }}</td>
+                        <td>{{ stock.close }}</td>
+                        <td>{{ stock.volume|intcomma }}</td>
+                        <td>{{ stock.exchange }}</td>
+                        <td><a href="{% url 'delete_stock' stock.symbol %}">Delete</a></td>
+                        <td><a href="{% url 'update_stock' symbol=stock.symbol name=stock.name date=stock.date %}">Update</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+  </form>
+</div>
+{% endblock %}

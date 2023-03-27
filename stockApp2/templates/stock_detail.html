@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div id="content-wrap">
+    <h2>{{ stock.name }} ({{ stock.symbol }})</h2> 
+    <a href="{% url 'update_stock' symbol=stock.symbol name=stock.name date=stock.date %}"><button>Update Stock</button></a>
+    <a href="{% url 'delete_stock' stock.symbol %}"><button>Delete Stock</button></a>
+    <p>Last closing price: ${{ stock.close }} &emsp; Date: {{ stock.date }} &emsp; Volume: {{ stock.volume|intcomma }} &emsp; Exchange: {{ stock.exchange }}</p>
+    <br>
+    <div id="stock-detail-table-div">
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Close</th>
+                    <th>Volume</th>
+                    <th>Adjusted High</th>
+                    <th>Adjusted Low</th>
+                    <th>Adjusted Close</th>
+                    <th>Adjusted Open</th>
+                    <th>Adjusted Volume</th>
+                    <th>Split Factor</th>
+                    <th>Dividend</th>
+                    <th>Symbol</th>
+                    <th>Exchange</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for price in stock_prices %}
+                <tr>
+                    <td>{{ price.date|date:"m/d/y" }}</td>
+                    <td>{{ price.open }}</td>
+                    <td>{{ price.high }}</td>
+                    <td>{{ price.low }}</td>
+                    <td>{{ price.close }}</td>
+                    <td>{{ price.volume|intcomma }}</td>
+                    <td>{{ price.adj_high }}</td>
+                    <td>{{ price.adj_low }}</td>
+                    <td>{{ price.adj_close }}</td>
+                    <td>{{ price.adj_open }}</td>
+                    <td>{{ price.volume|intcomma }}</td>
+                    <td>{{ price.split_factor }}</td>
+                    <td>{{ price.dividend }}</td>
+                    <td>{{ price.symbol }}</td>
+                    <td>{{ price.exchange }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
