@@ -11,16 +11,28 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+api_key = os.getenv('API_KEY')
+secret_key = os.getenv('SECRET_KEY')
+database_url = os.getenv('DATABASE_URL')
+db_user = os.getenv('DB_USER')
+db_host = os.getenv('DB_HOST')
+db_name = os.getenv('DB_NAME')
+db_port = os.getenv('DB_PORT')
+db_charset = os.getenv('DB_CHARSET')
+db_password = os.getenv('DB_PASSWORD')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bc-!zktp*wkj9ytp7e5pxb&-vop878cdut=3y4(208-g0bce6d'
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -57,7 +69,7 @@ ROOT_URLCONF = 'stockSite2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"], 
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +90,12 @@ WSGI_APPLICATION = 'stockSite2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': db_name,
+        'USER': db_user,
+        'PASSWORD': db_password,
+        'HOST': db_host,
+        'PORT': db_port,
     }
 }
 

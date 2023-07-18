@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Stock Garden</title>
+    <title>SoilRegan</title>
     {% load static %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'stockApp2/css/styles.css' %}">
@@ -12,15 +12,17 @@
         </header>
         <nav>
             <a href="{% url 'home' %}">
-                <h1 id='main-title'>Stock Garden</h1>
+                <h1 id='main-title'>SoilRegen</h1>
             </a>
 
             {% if user.is_authenticated %}
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'stock_list' %}">View Portfolio</a></li>
-                    <!-- <li><a href="{% url 'update_stock_list' %}">Update Portfolio</a></li> -->
-                    <li><a href="{% url 'add_stock' %}">Add Stock</a></li>
+                    <li><a href="{% url 'stock_list' %}">Dashboard</a></li>
+                    <li><a href="{% url 'add_stock' %}">Farms</a></li>
+                    <li><a href="{% url 'add_stock' %}">Fields</a></li>
+                    <li><a href="{% url 'add_stock' %}">Reports</a></li>
+                    <li><a href="{% url 'add_stock' %}">Analysis</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
 
                 </ul>
