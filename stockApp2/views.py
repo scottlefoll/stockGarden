@@ -20,8 +20,8 @@ from django.views import View
 from django.views import generic
 from stockApp2.forms import AddStockForm, DeleteStockForm
 from .models import Stock, StockPrice
-from .utils import MarketStack
-
+# from .utils import MarketStack
+from .services import ReportAnalysisService, RecommendationService, AmendmentRatioService
 
 def index(request):
     return render(request, 'index.html')
